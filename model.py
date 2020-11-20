@@ -18,7 +18,7 @@ X = df.drop('Class', axis=1)
 y = df['Class']
 
 def score_dt(X, y):
-  kf = KFold(n_splits = 10)
+  kf = KFold(n_splits= 10)
   total = 0
   for train_index, test_index in kf.split(X):
     X_train, X_test = X.iloc[train_index], X.iloc[test_index]
