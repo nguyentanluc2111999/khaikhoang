@@ -8,8 +8,10 @@
 </head>
 
 <body>
-    <!-- <p>{{ data | safe }}</p> -->
     <h2>Kết quả dự đoán cho file csv</h2>
+    <form action="download" method="post">
+        <input type="submit" class="btn" value="Tải xuống">
+    </form>
     <p>{{ prediction_text_csv | safe }}</p>
 </body>
 
