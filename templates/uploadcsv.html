@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Upload File</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_other.css') }}">
+</head>
+
+<body>
+    <h2>Tải lên 1 file csv cần dự đoán</h2>
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <input type="submit" value="Tải lên">
+    </form>
+</body>
+
+</html>

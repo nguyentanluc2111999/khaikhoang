@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Run</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_other.css') }}">
+</head>
+
+<body>
+    <h2>Tiến hành chạy dự đoán file:</h2>
+    <p>{{ data }}</p>
+    <form action="result" method="post">
+        <input type="hidden" name="csvfile" value='{{ data }}'>
+        <input type="submit" class="btn" value="Chạy">
+    </form>
+</body>
+
+</html>

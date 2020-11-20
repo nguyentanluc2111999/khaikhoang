@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_other.css') }}">
+</head>
+
+<body>
+    <!-- <p>{{ data | safe }}</p> -->
+    <h2>Kết quả dự đoán cho file csv</h2>
+    <p>{{ prediction_text_csv | safe }}</p>
+</body>
+
+</html>

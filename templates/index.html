@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Data Mining</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+  <div class="login">
+
+    <p>
+      <a href="{{ url_for('upload')}}"><button>Tải lên 1 file csv</button></a>
+    </p>
+
+    <h1>DỰ ĐOÁN TÌNH TRẠNG LY HÔN</h1>
+    <h2>{{ prediction_text }}</h2>
+    <table border="1">
+      <form action="{{ url_for('predict')}}" method="post">
+        <script>
+          var thuoctinh = new Array(
+            "Khi một trong những lời xin lỗi của chúng ta khi cuộc thảo luận của chúng ta đi theo chiều hướng xấu, vấn đề sẽ không mở rộng",
+            "Tôi biết chúng ta có thể bỏ qua sự khác biệt của mình, ngay cả khi đôi khi mọi thứ trở nên khó khăn",
+            "Khi cần, chúng tôi có thể đem ra bàn bạc với vợ ngay từ đầu và sửa lại",
+            "Khi tôi tranh cãi với vợ tôi, cuối cùng tôi sẽ liên lạc với anh ta",
+            "Khoảng thời gian tôi dành cho vợ là đặc biệt đối với chúng tôi",
+            "Chúng tôi không có thời gian ở nhà với tư cách là đối tác",
+            "Chúng ta giống như hai người xa lạ cùng chung môi trường ở nhà hơn là gia đình",
+            "Tôi tận hưởng kỳ nghỉ của chúng tôi với vợ tôi",
+            "Tôi thích đi du lịch với vợ tôi",
+            "Vợ tôi và hầu hết các mục tiêu của chúng tôi là chung",
+            "Tôi nghĩ rằng một ngày nào đó, khi nhìn lại, tôi thấy vợ chồng tôi rất hòa hợp với nhau",
+            "Tôi và vợ tôi có những giá trị tương đồng về tự do cá nhân",
+            "Tôi và chồng có những trò giải trí giống nhau",
+            "Hầu hết các mục tiêu của chúng ta đối với mọi người (con cái, bạn bè, v.v.) đều giống nhau",
+            "Ước mơ của chúng tôi được sống với vợ tôi rất giống nhau và hòa hợp",
+            "Chúng tôi tương thích với vợ tôi về tình yêu nên được",
+            "Chúng tôi có cùng quan điểm với vợ tôi về hạnh phúc trong cuộc sống của bạn",
+            "Vợ tôi và tôi có những quan điểm giống nhau về việc hôn nhân nên như thế nào",
+            "Vợ tôi và tôi có những ý kiến ​​giống nhau về vai trò nên có trong hôn nhân",
+            "Vợ tôi và tôi có những giá trị giống nhau về sự tin tưởng",
+            "Tôi biết chính xác những gì vợ tôi thích",
+            "Tôi biết vợ tôi muốn được chăm sóc như thế nào khi cô ấy bị ốm",
+            "Tôi biết món ăn yêu thích của vợ tôi",
+            "Tôi có thể cho bạn biết loại căng thẳng mà vợ tôi đang đối mặt trong cuộc sống",
+            "Tôi có kiến ​​thức về thế giới nội tâm của vợ tôi",
+            "Tôi biết những mối quan tâm cơ bản của vợ tôi",
+            "Tôi biết nguồn căng thẳng hiện tại của vợ tôi là gì",
+            "Tôi biết những hy vọng và mong muốn của vợ tôi",
+            "Tôi biết vợ tôi rất rõ",
+            "Tôi biết bạn bè của vợ tôi và các mối quan hệ xã hội của họ",
+            "Tôi cảm thấy hung hăng khi tranh cãi với vợ",
+            "Khi thảo luận với vợ, tôi thường sử dụng những cách diễn đạt như “anh luôn luôn” hoặc “anh không bao giờ”",
+            "Tôi có thể sử dụng những câu nói tiêu cực về tính cách của vợ tôi trong các cuộc thảo luận của chúng tôi",
+            "Tôi có thể sử dụng các biểu hiện xúc phạm trong các cuộc thảo luận của chúng tôi",
+            "Tôi có thể xúc phạm các cuộc thảo luận của chúng tôi",
+            "Tôi có thể thấy bẽ mặt khi chúng ta tranh cãi",
+            "Cuộc tranh cãi của tôi với vợ không bình tĩnh",
+            "Tôi ghét cách nói của vợ tôi",
+            "Những trận đánh nhau thường xảy ra đột ngột",
+            "Chúng ta chỉ mới bắt đầu cuộc chiến trước khi tôi biết chuyện gì đang xảy ra",
+            "Khi tôi nói chuyện với vợ về điều gì đó, sự bình tĩnh của tôi đột nhiên bị phá vỡ",
+            "Khi tôi tranh cãi với vợ, nó chỉ diễn ra và tôi không nói một lời",
+            "Tôi hầu như chỉ muốn làm dịu môi trường một chút",
+            "Đôi khi tôi nghĩ rằng việc rời khỏi nhà một thời gian là điều tốt cho tôi",
+            "Tôi thà im lặng còn hơn tranh cãi với vợ",
+            "​​Ngay cả khi tôi đúng trong cuộc tranh luận, tôi vẫn khát khao không làm cho bên kia khó chịu",
+            "Khi tranh cãi với vợ, tôi im lặng vì sợ không kiềm chế được cơn nóng giận",
+            "Tôi cảm thấy đúng trong các cuộc thảo luận của chúng tôi",
+            "Tôi không liên quan gì đến những gì tôi đã bị buộc tội",
+            "Tôi thực sự không phải là người có tội về những gì tôi bị buộc tội",
+            "Tôi không phải là người sai về các vấn đề ở nhà",
+            "Tôi sẽ không ngần ngại nói với cô ấy về sự kém cỏi của vợ tôi",
+            "Khi tôi thảo luận về nó, tôi nhắc cô ấy về những vấn đề còn thiếu sót của vợ tôi",
+            "Tôi không ngại nói với cô ấy về sự kém cỏi của vợ tôi"
+          );
+          document.write("<tr><th class='tieude' colspan='1' rowspan='2'>STT</th><th class='tieude' rowspan='2'>Câu hỏi</th><th class='tieude' colspan='5'>Mức độ</th></tr>");
+          document.write("<tr><th class='tieude'>0</th><th class='tieude'>1</th><th class='tieude'>2</th><th class='tieude'>3</th><th class='tieude'>4</th></tr>");
+          for (var i = 1; i <= 54; i++) {
+            document.write("<tr>")
+            document.write("<td class='stt'>" + i + "</td>");
+            document.write("<td>" + thuoctinh[i - 1] + "</td>");
+            document.write("<td><input type='radio' name='Atr" + i + "' value='0' checked></td>");
+            document.write("<td><input type='radio' name='Atr" + i + "' value='1'></td>");
+            document.write("<td><input type='radio' name='Atr" + i + "' value='2'></td>");
+            document.write("<td><input type='radio' name='Atr" + i + "' value='3'></td>");
+            document.write("<td><input type='radio' name='Atr" + i + "' value='4'></td>");
+            document.write("</tr>")
+          }
+        </script>
+        <tr>
+          <th colspan="7"><button type="submit" class="btn">Thực hiện</button></th>
+        </tr>
+      </form>
+    </table>
+
+  </div>
+</body>
+
+</html>
